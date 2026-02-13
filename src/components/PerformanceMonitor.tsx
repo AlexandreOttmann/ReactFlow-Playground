@@ -48,7 +48,7 @@ export const PerformanceMonitor = memo(() => {
   };
 
   return (
-    <div className="absolute bottom-4 right-4 z-10 bg-white p-3 rounded-lg shadow-lg border border-gray-200 text-sm">
+    <div className="absolute bottom-50 right-4 z-10 bg-white p-3 rounded-lg shadow-lg border border-gray-200 text-sm">
       <div className="font-semibold text-gray-700 mb-2">Performance Stats</div>
       <div className="space-y-1 text-gray-600">
         <div className="flex justify-between gap-4">
