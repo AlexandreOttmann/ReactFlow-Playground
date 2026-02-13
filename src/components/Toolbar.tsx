@@ -73,16 +73,16 @@ export function Toolbar() {
   };
 
   return (
-    <div className="absolute top-4 left-4 z-10 flex flex-col gap-2 bg-white dark:bg-gray-800 p-3 rounded-lg shadow-lg border border-gray-200 dark:border-gray-700">
+    <div className="absolute top-4 left-4 z-10 flex flex-col gap-2 bg-white p-3 rounded-lg shadow-lg border border-gray-200 ">
       <div className="flex gap-2 items-center border-b pb-2 mb-2">
-        <span className="text-sm font-semibold text-gray-700 dark:text-gray-300">
+        <span className="text-sm font-semibold ">
           Nodes: {nodes.length}
         </span>
       </div>
 
-      <div className="flex flex-col gap-2">
+      <div className="flex flex-col gap-2 text-white">
         <Button 
-          onClick={addNode} 
+          onClick={() => addNode()} 
           size="sm" 
           variant="default"
           className="justify-start"
@@ -94,7 +94,7 @@ export function Toolbar() {
         <Button 
           onClick={handleGenerateBulk} 
           size="sm" 
-          variant="secondary"
+          variant="default"
           className="justify-start"
         >
           <Zap className="h-4 w-4 mr-2" />
@@ -104,7 +104,7 @@ export function Toolbar() {
         <div className="border-t pt-2 mt-2"></div>
 
         <Button 
-          onClick={saveToLocalStorage} 
+          onClick={() => saveToLocalStorage()} 
           size="sm" 
           variant="outline"
           className="justify-start"
@@ -114,7 +114,7 @@ export function Toolbar() {
         </Button>
 
         <Button 
-          onClick={loadFromLocalStorage} 
+          onClick={() => loadFromLocalStorage()} 
           size="sm" 
           variant="outline"
           className="justify-start"

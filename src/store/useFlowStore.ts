@@ -27,10 +27,12 @@ interface FlowState {
   onNodesChange: (changes: NodeChange[]) => void;
   onEdgesChange: (changes: EdgeChange[]) => void;
   onConnect: (connection: Connection) => void;
+  onNodeClick: (event: React.MouseEvent, node: Node<NodeData>) => void;
   addNode: (position?: { x: number; y: number }) => void;
   updateNode: (nodeId: string, data: Partial<NodeData>) => void;
   deleteNode: (nodeId: string) => void;
   setSelectedNode: (node: Node<NodeData> | null) => void;
+  toggleNodeVisibility: (nodeId: string) => void;
   clearFlow: () => void;
   
   // Bulk operations
@@ -97,6 +99,11 @@ export const useFlowStore = create<FlowState>((set, get) => ({
     setTimeout(() => get().saveToLocalStorage(), 100);
   },
 
+  // Handle node click - optimized to avoid accessing nodes array in components
+  onNodeClick: (event: React.MouseEvent, node: Node<NodeData>) => {
+    set({ selectedNode: node });
+  },
+
   // Add a new node
   addNode: (position = { x: Math.random() * 500, y: Math.random() * 500 }) => {
     const newNode: Node<NodeData> = {
@@ -151,6 +158,18 @@ export const useFlowStore = create<FlowState>((set, get) => ({
   // Set selected node
   setSelectedNode: (node: Node<NodeData> | null) => {
     set({ selectedNode: node });
+  },
+
+  // Toggle node visibility - useful for large node trees
+  toggleNodeVisibility: (nodeId: string) => {
+    set({
+      nodes: get().nodes.map((node) =>
+        node.id === nodeId
+          ? { ...node, hidden: !node.hidden }
+          : node
+      ),
+    });
+    setTimeout(() => get().saveToLocalStorage(), 100);
   },
 
   // Clear the entire flow

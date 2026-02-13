@@ -37,6 +37,7 @@ export function NodeEditor() {
     if (selectedNode) {
       updateNode(selectedNode.id, { label, description });
     }
+    handleClose()
   };
 
   const handleDelete = () => {
